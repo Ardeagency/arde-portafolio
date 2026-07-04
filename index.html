@@ -913,5 +913,116 @@ if(ascv&&ascBtn){
   });
 }
 </script>
+<script>
+  // barra sólida + progreso
+  var bar=document.getElementById('bar'),trail=document.getElementById('trail');
+  addEventListener('scroll',function(){
+    bar.classList.toggle('solid',scrollY>40);
+    var h=document.documentElement;
+    var p=(h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
+    trail.style.width=p+'%';
+  },{passive:true});
+
+  // reveal on scroll
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(!reduce && 'IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);} });
+    },{threshold:.14,rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.reveal,.stagger').forEach(function(el){io.observe(el)});
+  }else{
+    document.querySelectorAll('.reveal,.stagger').forEach(function(el){el.classList.add('in')});
+  }
+
+  // count-up precio
+  var priceEl=document.getElementById('count');
+  var done=false;
+  function countUp(){
+    if(done)return;done=true;
+    var target=6300,start=null,dur=1400;
+    function fmt(n){return '$'+Math.round(n).toLocaleString('en-US')}
+    function tick(t){ if(!start)start=t; var p=Math.min((t-start)/dur,1);
+      var e=1-Math.pow(1-p,3);
+      priceEl.textContent=fmt(target*e);
+      if(p<1)requestAnimationFrame(tick); else priceEl.textContent='$6,300';
+    }
+    requestAnimationFrame(tick);
+  }
+  if(!reduce && 'IntersectionObserver' in window){
+    var pio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)countUp()})},{threshold:.5});
+    pio.observe(priceEl);
+  }
+
+  // countdown a la revelación (1 oct 2026, CDMX)
+  try{
+    var target=new Date('2026-10-01T00:00:00-06:00');
+    var days=Math.ceil((target-Date.now())/864e5);
+    if(days>0){
+      document.getElementById('cd-days').textContent=days;
+      document.getElementById('countdown').hidden=false;
+    }
+  }catch(e){}
+
+  /* ARDE tracking unificado v2: filtro de bots + gate humano + apertura + destinatario + visitas + heatmap + clics (ntfy.sh) */
+(function(){
+  try{
+    var ARDE_SELF=false;/*self*/try{fetch('https://ipapi.co/json/').then(function(r){return r.json();}).then(function(d){if(/rionegro|llanogrande/i.test((d.city||'')+' '+(d.region||''))&&!/[?&]test=1/i.test(location.search))ARDE_SELF=true;}).catch(function(){});}catch(e){}var TOPIC='https://ntfy.sh/arde-cotizaciones-7k2pqz9x';
+    var LABEL='Portafolio ARDE Web', KEY='portafolio-arde';
+    var ua=navigator.userAgent||'';
+    var isBot = navigator.webdriver===true
+      || /bot\b|crawl|spider|slurp|bingbot|yandex|baidu|duckduckbot|headless|phantom|puppeteer|playwright|python-|curl\/|wget|libwww|httpclient|okhttp|go-http|java\/|facebookexternalhit|embedly|telegrambot|whatsapp|discordbot|slackbot|twitterbot|linkedinbot|googlebot|applebot|lighthouse|pingdom|uptimerobot|datadog|semrush|ahrefs|mj12bot|dotbot|petalbot|bytespider|gptbot|ccbot|claudebot|amazonbot|zgrab|censys|shodan|expanse|netcraft|httpx|nmap|masscan|paloalto|internetmeasurement/i.test(ua)||(function(){var m=ua.match(/Chrome\/(\d+)/);return !!m&&+m[1]<90;})();
+    if(isBot) return;
+    function qp(n){try{var m=location.search.match(new RegExp('[?&]'+n+'=([^&]+)'));return m?decodeURIComponent(m[1].replace(/\+/g,' ')):'';}catch(e){return '';}}
+    var who=qp('to')||qp('p');
+    var whoLine=who?('\nDestinatario: '+who):'';
+    function post(title,tags,body){if(ARDE_SELF)return; try{ fetch(TOPIC,{method:'POST',keepalive:true,headers:{'Title':title,'Tags':tags},body:body}); }catch(e){ try{navigator.sendBeacon(TOPIC,body);}catch(e2){} } }
+    var interacted=false;
+    ['scroll','mousemove','touchstart','keydown','pointerdown'].forEach(function(ev){window.addEventListener(ev,function(){interacted=true;},{passive:true});});
+    var vis=0,lastV=Date.now();
+    function vtick(){ if(document.visibilityState==='visible')vis+=Date.now()-lastV; lastV=Date.now(); }
+    setInterval(vtick,1000);
+    var maxPct=0,deepest='';
+    function onScroll(){ var h=document.documentElement; var sc=h.scrollTop||document.body.scrollTop||0; var p=Math.round((sc+h.clientHeight)/h.scrollHeight*100); if(p>maxPct)maxPct=Math.min(100,p); }
+    window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+    var eb=[].slice.call(document.querySelectorAll('.eyebrow,.board-tag'));
+    if(eb.length && 'IntersectionObserver' in window){
+      var io2=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ deepest=e.target.textContent.trim().replace(/\s+/g,' '); }});},{threshold:.4});
+      eb.forEach(function(el){io2.observe(el);});
+    }
+    var openSent=false;
+    function maybeOpen(){
+      if(openSent)return; vtick();
+      if((interacted && vis>=2500) || vis>=9000){
+        openSent=true;
+        var visits=0;
+        try{ visits=parseInt(localStorage.getItem('arde_v_'+KEY)||'0',10)||0;
+          if(!sessionStorage.getItem('arde_s_'+KEY)){ sessionStorage.setItem('arde_s_'+KEY,'1'); visits+=1; localStorage.setItem('arde_v_'+KEY,String(visits)); }
+        }catch(e){}
+        var rep=visits>=2?(' (visita #'+visits+', repetida)'):'';
+        function openPing(loc){ post('ARDE - Abrieron: '+LABEL,(visits>=2?'fire,eyes':'eyes'),
+          'Abrieron: '+LABEL+rep+whoLine+'\n'+loc+'\nLlego desde: '+(document.referrer||'enlace directo')+'\nDispositivo: '+ua.slice(0,90)); }
+        fetch('https://ipapi.co/json/').then(function(r){return r.json();}).then(function(d){if(/rionegro|llanogrande/i.test((d.city||'')+' '+(d.region||''))&&!/[?&]test=1/i.test(location.search))ARDE_SELF=true;
+          openPing('Ubicacion: '+(d.city||'?')+', '+(d.region||'')+' '+(d.country_name||'?')+' (IP '+(d.ip||'?')+')');
+        }).catch(function(){ openPing('Ubicacion: no disponible'); });
+      }
+    }
+    var gi=setInterval(function(){ maybeOpen(); if(openSent)clearInterval(gi); },1000);
+    var sentH=false;
+    function fmt(ms){var s=Math.round(ms/1000),m=Math.floor(s/60);return m+'m '+(s%60)+'s';}
+    function sendH(){ if(sentH)return; sentH=true; vtick(); if(!openSent)return;
+      post('ARDE - Lectura: '+LABEL,'book,bar_chart','Leyo: '+LABEL+whoLine+'\nProfundidad: '+maxPct+'%'+(maxPct>=90?' (llego al final)':'')+'\nSeccion mas avanzada: '+(deepest||'inicio')+'\nTiempo activo: '+fmt(vis)); }
+    document.addEventListener('visibilitychange',function(){ if(document.visibilityState==='hidden')sendH(); });
+    window.addEventListener('pagehide',sendH);
+    document.addEventListener('click',function(ev){
+      var a=ev.target.closest&&ev.target.closest('a'); if(!a)return;
+      var href=a.getAttribute('href')||''; var isCTA=a.classList.contains('btn')||a.classList.contains('pitch-card')||href.indexOf('wa.me')>-1||href.indexOf('mailto:')>-1||href.indexOf('.pdf')>-1;
+      if(!isCTA)return;
+      var t=(a.textContent||'').trim().replace(/\s+/g,' ').slice(0,40);
+      post('ARDE - Clic CTA: '+LABEL,'point_up,white_check_mark','Hizo clic en "'+t+'"\nPropuesta: '+LABEL+whoLine);
+    },true);
+  }catch(e){}
+})();
+
+</script>
 </body>
 </html>
