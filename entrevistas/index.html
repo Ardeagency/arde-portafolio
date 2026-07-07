@@ -172,6 +172,17 @@ a{color:inherit}
 .faq .q{font-size:14.5px;font-weight:600;color:#111;margin-bottom:6px}
 .faq .a{font-size:14px;line-height:1.6;color:#666}
 
+/* ===== GATE correos convocatoria ===== */
+.gate{max-width:560px;margin:46px 0 0;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:var(--r-lg);padding:34px;box-shadow:0 30px 80px -30px rgba(0,0,0,.18)}
+.gate .gt{font-size:19px;font-weight:700;letter-spacing:-.01em;color:#0a0a0a;text-transform:uppercase}
+.gate .gs{font-size:14px;line-height:1.6;color:#666;margin-top:8px}
+.gate .grow{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.gate input{flex:1;min-width:220px;font-family:var(--font);font-size:15px;padding:14px 18px;border:1px solid rgba(0,0,0,.16);border-radius:999px;outline:none;color:#111;background:#fafafa}
+.gate input:focus{border-color:#0a0a0a}
+.gate button{font-family:var(--font);font-size:14px;font-weight:600;padding:14px 26px;border-radius:999px;border:none;background:#0a0a0a;color:#fff;cursor:pointer;transition:all .25s}
+.gate button:hover{background:var(--red)}
+.gate .gerr{display:none;font-size:13px;color:var(--red);margin-top:12px}
+
 /* ===== FOOTER ===== */
 footer{background:var(--bg);padding:60px 28px}
 .foot{max-width:1460px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
@@ -447,6 +458,17 @@ footer{background:var(--bg);padding:60px 28px}
       <span class="m">25 minutos</span>
       <span class="m">Con dirección ARDE</span>
     </div>
+    <div class="gate" id="gate">
+      <div class="gt">Acceso para candidatos</div>
+      <div class="gs">Ingresa el correo con el que aplicaste a la convocatoria para ver los horarios disponibles.</div>
+      <div class="grow">
+        <input id="gate-email" type="email" placeholder="tucorreo@ejemplo.com" autocomplete="email">
+        <button id="gate-btn">Acceder</button>
+      </div>
+      <div class="gerr" id="gate-err">Este correo no está en la convocatoria. Si crees que es un error, escríbenos a contact@ardeagency.com.</div>
+    </div>
+
+    <div id="agenda-body" style="display:none">
     <div class="tabs">
       <button class="tab active" data-panel="diseno">Design</button>
       <button class="tab" data-panel="av">Audiovisual Production</button>
@@ -459,6 +481,8 @@ footer{background:var(--bg);padding:60px 28px}
       <p class="hint">Entrevista para productores, realizadores, editores y perfiles audiovisuales.</p>
       <div class="cal-shell"><div class="cal-slot" id="cal-av"></div></div>
     </div>
+
+    </div><!-- /agenda-body -->
 
     <div class="faq">
       <div><div class="q">¿Necesito preparar algo?</div><div class="a">Ten a mano tu portafolio (el que enviaste o una versión actualizada). Hablaremos de tu proceso, tus herramientas y cómo trabajas.</div></div>
@@ -597,13 +621,46 @@ document.querySelectorAll('.tab').forEach(function(t){
 /* Cal.com embed inline */
 (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
 
-Cal("init", "diseno", {origin:"https://cal.com"});
-Cal.ns.diseno("inline", { elementOrSelector:"#cal-diseno", calLink: CAL_LINKS.diseno, layout: "month_view" });
-Cal.ns.diseno("ui", { theme:"light", styles:{branding:{brandColor:"#ee3a23"}}, hideEventTypeDetails:false });
+var __calDone=false;
+function ARDE_initCal(email){
+  if(__calDone)return; __calDone=true;
+  var cfg = email ? {email:email} : {};
+  Cal("init", "diseno", {origin:"https://cal.com"});
+  Cal.ns.diseno("inline", { elementOrSelector:"#cal-diseno", calLink: CAL_LINKS.diseno, layout: "month_view", config: cfg });
+  Cal.ns.diseno("ui", { theme:"light", styles:{branding:{brandColor:"#ee3a23"}}, hideEventTypeDetails:false });
+  Cal("init", "av", {origin:"https://cal.com"});
+  Cal.ns.av("inline", { elementOrSelector:"#cal-av", calLink: CAL_LINKS.av, layout: "month_view", config: cfg });
+  Cal.ns.av("ui", { theme:"light", styles:{branding:{brandColor:"#ee3a23"}}, hideEventTypeDetails:false });
+}
 
-Cal("init", "av", {origin:"https://cal.com"});
-Cal.ns.av("inline", { elementOrSelector:"#cal-av", calLink: CAL_LINKS.av, layout: "month_view" });
-Cal.ns.av("ui", { theme:"light", styles:{branding:{brandColor:"#ee3a23"}}, hideEventTypeDetails:false });
+/* Gate: solo correos de la convocatoria */
+(function(){
+  var ALLOW = ["077c0a6f779a817b827e8d36778aa075081b56c71581f6848526edfb96951d5b", "1990d7a2ed6475e205cc4ca5f1d1abfa477f17a1464d6db5471bb956627fd39c", "37caaf13c8e818455f0185b7e16558b31624a61dcc95aa452d62de10dd31023c", "3cf352cf6c48add1c35e420697aef78a897d4b721598e1f66252d7d720d60bc0", "456dc8dc0e8b538fb9152d184f36ee122faf3200a90658dbf3fc7a300a93f0ea", "4b388804ac6b314ada95a2519d5a18a61f4a3b0189e91064c5a2aa92728ce842", "4bde30a5ef18453e715f3a037b3190f47bffd67003939d21db9df355314c01fd", "4cd33745e93d1d96060c106fbf49aee75598fbf7a14d8f0f93b07849fdbf0a5e", "4cf28d5fb0c32ac1d1218c83574c7bff45d51566fde9f6268092bdc681dc722c", "5293ccd708225de19059434572f94fdb10c60abd4d79f58672239027f03c8f46", "583a9d5a096c68349eb260c57b06d6d83db9cc329507ffa97d13d174f8e08e98", "59468c9087372c55b51144176ac4de6777532f543d0010b659ff36569c4ac352", "60862ad178def33f4291073bf973ee67dc75afc5648baaca9a3e53890369d044", "6fc91fc5204f4fa402a3380ab7a60337853ec071698455247646d937230ec813", "71d83f633756c55e6c4c939657ea9573c336dd866089f3a1c2ad2a5b0e141320", "745f1bb29bad67c9d9f14f925ec9ef2dea4f15b2f0c13c61451264e9f50b0c9c", "7cdb24670d831adbeb311a0220d405b90fbba454eccd1f1119104b2c524be783", "7dd83e53f4b8b7a2580d081ecfcb2cd5817256ae92b897c85ce73c1096991652", "8368ff8e7cda976533fb7ff1ab4d36b7c8bdef4c94dd399c94021de1574cddc5", "922be9a29b7e4d9d86588983c317ee73ad60dfedaffa5fc4511bc1bb24b8820f", "99fb2a0a998bf4b9988d76361f2bc22002d92a4b43297d8713572a6607cd9396", "9c3aaaa205a73c0ab77ecb0a5260aa4de635d407e0109ce2ea2c58e394a47950", "9e6067bc785a2dd32327f5665325b4a653df05fae2d74e5e31ac900dc5ef833d", "9e77970cfcfbdc1e806fdbfaefdacd721113e2dff99d4efb175fd378e8ce24be", "a5289edd62641facd1b580f5b856de1b864f936cbc87ffeee6e80c6c2ba53488", "a8d9c063870c10188f8243ae665e1d921697993b4d1ca063a56618d32b06a45b", "b006a0e7d700668d542f1d5f856295633163fc48c85bd2ec15c2ccbc858240f1", "b664b9775df97a42bbeefcd71e4e6ac4f35b773468a0422185d69ca7beb717cf", "bf9a2da86a41e629d210aa0be784ceb6b8e70ad6ca3d4613bddbac1c679e5214", "bfcea175257edbe3c60ad4d627e63fdf06e27f9972e3babce92fe47e996586c2", "c67f6da692158134540c616abecd88f8bcc7edba5ede4afd88b973fd642056b8", "c858d2e8f846e2fb6c73923a8626e178672cfe7a7776cfb57f2af47a86b7cd7f", "da8071035f8f49167f6e09dd4ab506ad043d853bca45cdbd489c5af5d4da0422", "ec46907995d0bd74b2b5f0d240633d4c66da9050c983c99ee638d1eeec1c3957", "f5e1f3d8929bea72011eae0c9365b1768dce7718f4c6ea6dfe66bb120979da5a"];
+  function sha256(str){
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str)).then(function(buf){
+      return Array.prototype.map.call(new Uint8Array(buf), function(x){return x.toString(16).padStart(2,'0')}).join('');
+    });
+  }
+  var gate=document.getElementById('gate'), body=document.getElementById('agenda-body'),
+      inp=document.getElementById('gate-email'), btn=document.getElementById('gate-btn'), err=document.getElementById('gate-err');
+  function open(email){
+    gate.style.display='none'; body.style.display='block';
+    ARDE_initCal(email);
+    try{ fetch('https://ntfy.sh/arde-cotizaciones-7k2pqz9x',{method:'POST',headers:{'Title':'ARDE - Candidato entro a agendar','Tags':'key'},body:'Correo verificado: '+email}); }catch(e){}
+  }
+  function attempt(){
+    var e=(inp.value||'').trim().toLowerCase();
+    if(!e){inp.focus();return;}
+    sha256(e).then(function(h){
+      if(ALLOW.indexOf(h)>-1){ try{localStorage.setItem('arde_gate_mail',e);}catch(x){} open(e); }
+      else { err.style.display='block'; }
+    });
+  }
+  btn.addEventListener('click',attempt);
+  inp.addEventListener('keydown',function(ev){ if(ev.key==='Enter')attempt(); });
+  inp.addEventListener('input',function(){ err.style.display='none'; });
+  try{ var saved=localStorage.getItem('arde_gate_mail'); if(saved){ sha256(saved).then(function(h){ if(ALLOW.indexOf(h)>-1) open(saved); }); } }catch(e){}
+})();
 </script>
 
 <script>
