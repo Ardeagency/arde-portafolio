@@ -176,6 +176,12 @@ h2.title .red{color:var(--red)}
 .fgrid .fcase{margin-bottom:10px}
 .fgrid .fmeta{grid-template-columns:1fr;gap:6px}
 @media(max-width:760px){.fgrid{grid-template-columns:1fr}}
+.ytp{cursor:pointer}
+.ytp img,.ytp iframe{width:100%;aspect-ratio:16/9;object-fit:contain;background:#000;border:0;display:block}
+.fcase.scope .strip img{aspect-ratio:2206/946}
+.reels.r6{grid-template-columns:repeat(6,1fr)}
+@media(max-width:900px){.reels.r6{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.reels.r6{grid-template-columns:1fr 1fr}}
 .playhint{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;transition:opacity .3s ease}
 .playhint span{width:74px;height:74px;border-radius:50%;background:rgba(238,58,35,.92);display:grid;place-items:center;box-shadow:0 10px 40px rgba(0,0,0,.5)}
 .playhint svg{margin-left:4px}
@@ -443,25 +449,212 @@ footer{background:#0a0908;padding:56px 0 44px;border-top:1px solid var(--line)}
       <p class="lede">At ARDE we create advertising films and visual campaigns that were previously impossible to produce, combining artificial intelligence with cinematic direction and storytelling expertise: <b>advertising films, brand films, launch campaigns, commercial storytelling and social content ecosystems</b>.</p>
     </div>
 
-    <!-- featured -->
-    <div class="fcase rv" style="margin-top:46px">
-      <div class="player" data-player>
-        <video preload="none" poster="assets/vid/nena_sentidos_poster.jpg" playsinline>
-          <source src="assets/vid/nena_sentidos.mp4" type="video/mp4">
-        </video>
+    <!-- featured: ARDE original -->
+    <div class="fcase scope rv" style="margin-top:46px">
+      <div class="player ytp" data-yt="M-rSphqqD4o" role="button" tabindex="0" aria-label="Play Diary of a Bastard">
+        <img src="assets/vid/diary_of_a_bastard_poster.jpg" alt="Diary of a Bastard — Benjamin, the hundred-dollar bill">
         <div class="playhint"><span><svg viewBox="0 0 24 24" width="26" height="26"><path d="M6 4l14 8-14 8z" fill="#fff"/></svg></span></div>
       </div>
       <div class="fmeta">
-        <span class="cl">Nena Kids · Sentidos</span>
-        <span class="cat">Kids · CGI Character Film</span>
-        <span class="srv">AI Film</span>
+        <span class="cl">Diary of a Bastard</span>
+        <span class="cat">ARDE Original · Short film · 8 min</span>
+        <span class="srv">Human-Directed AI Film</span>
       </div>
-      <p class="fdesc">“Sentidos”: a CGI children's film about discovering the world through the senses — characters, meadows and story fully generated and directed at ARDE.</p>
-      <div class="strip rv">
-        <img src="assets/img/gal/nena_1.jpg" alt="Nena Kids — smelling the flowers" loading="lazy">
-        <img src="assets/img/gal/nena_2.jpg" alt="Nena Kids — dandelion meadow" loading="lazy">
-        <img src="assets/img/gal/nena_3.jpg" alt="Nena Kids — listening to the river" loading="lazy">
+      <p class="fdesc">A week in the life of a hundred-dollar bill, told by the only witness that never leaves the scene: bribes, wakes, borders, birthdays, a mint, a cocaine lab and a choir. Every character, location and state of the bill was designed and locked before a single shot was generated, and every cut was a human decision. AI was the camera. The point of view is ours.</p>
+      <div class="strip s4 rv">
+        <img src="assets/img/gal/dob_1.jpg" alt="Diary of a Bastard — Benjamin" loading="lazy">
+        <img src="assets/img/gal/dob_2.jpg" alt="Diary of a Bastard — birthday candles" loading="lazy">
+        <img src="assets/img/gal/dob_3.jpg" alt="Diary of a Bastard — the penthouse" loading="lazy">
+        <img src="assets/img/gal/dob_4.jpg" alt="Diary of a Bastard — sorry" loading="lazy">
       </div>
+    </div>
+
+    <div class="fgrid">
+      <div class="fcase rv">
+        <div class="player" data-player>
+          <video preload="none" poster="assets/vid/wakeup_manifesto_poster.jpg" playsinline><source src="assets/vid/wakeup_manifesto.mp4" type="video/mp4"></video>
+          <div class="playhint"><span><svg viewBox="0 0 24 24" width="24" height="24"><path d="M6 4l14 8-14 8z" fill="#fff"/></svg></span></div>
+        </div>
+        <div class="fmeta"><span class="cl">WakeUp · Manifesto</span><span class="cat">Colombia · Nutrition · AI Film</span></div>
+        <p class="fdesc">Brand manifesto for the nutrition brand we built from zero: from the first light of the sun to the moment you decide to move — athletes, landscapes and product, fully generated and directed at ARDE.</p>
+        <div class="strip rv">
+          <img src="assets/img/gal/wakeup_manifesto_1.jpg" alt="WakeUp · Manifesto — golden field" loading="lazy">
+          <img src="assets/img/gal/wakeup_manifesto_2.jpg" alt="WakeUp · Manifesto — morning yoga" loading="lazy">
+          <img src="assets/img/gal/wakeup_manifesto_3.jpg" alt="WakeUp · Manifesto — the fight" loading="lazy">
+        </div>
+      </div>
+      <div class="fcase rv">
+        <div class="player" data-player>
+          <video preload="none" poster="assets/vid/nena_sentidos_poster.jpg" playsinline><source src="assets/vid/nena_sentidos.mp4" type="video/mp4"></video>
+          <div class="playhint"><span><svg viewBox="0 0 24 24" width="24" height="24"><path d="M6 4l14 8-14 8z" fill="#fff"/></svg></span></div>
+        </div>
+        <div class="fmeta"><span class="cl">Nena Kids · Sentidos</span><span class="cat">Kids · Baby care · CGI Character Film</span></div>
+        <p class="fdesc">“Sentidos”: a CGI children&#x27;s film about discovering the world through the senses — characters, meadows and story fully generated and directed at ARDE.</p>
+        <div class="strip rv">
+          <img src="assets/img/gal/nena_1.jpg" alt="Nena Kids · Sentidos — smelling the flowers" loading="lazy">
+          <img src="assets/img/gal/nena_2.jpg" alt="Nena Kids · Sentidos — dandelion meadow" loading="lazy">
+          <img src="assets/img/gal/nena_3.jpg" alt="Nena Kids · Sentidos — listening to the river" loading="lazy">
+        </div>
+      </div>
+      <div class="fcase rv">
+        <div class="player" data-player>
+          <video preload="none" poster="assets/vid/alsec_poster.jpg" playsinline><source src="assets/vid/alsec.mp4" type="video/mp4"></video>
+          <div class="playhint"><span><svg viewBox="0 0 24 24" width="24" height="24"><path d="M6 4l14 8-14 8z" fill="#fff"/></svg></span></div>
+        </div>
+        <div class="fmeta"><span class="cl">ALSEC · Corporate film</span><span class="cat">Colombia · Functional ingredients · AI Film</span></div>
+        <p class="fdesc">Corporate film for one of Colombia&#x27;s most innovative food-ingredient companies: clinical nutrition, labs, spray-drying plants and the scale of its operation — people and facilities recreated with AI.</p>
+        <div class="strip rv">
+          <img src="assets/img/gal/alsec_1.jpg" alt="ALSEC · Corporate film — clinical nutrition" loading="lazy">
+          <img src="assets/img/gal/alsec_2.jpg" alt="ALSEC · Corporate film — warehouse" loading="lazy">
+          <img src="assets/img/gal/alsec_3.jpg" alt="ALSEC · Corporate film — quality control" loading="lazy">
+        </div>
+      </div>
+      <div class="fcase rv">
+        <div class="player" data-player>
+          <video preload="none" poster="assets/vid/aokii_poster.jpg" playsinline><source src="assets/vid/aokii.mp4" type="video/mp4"></video>
+          <div class="playhint"><span><svg viewBox="0 0 24 24" width="24" height="24"><path d="M6 4l14 8-14 8z" fill="#fff"/></svg></span></div>
+        </div>
+        <div class="fmeta"><span class="cl">Aokii Lofts · Amenities</span><span class="cat">Colombia · Real estate · AI Visualization</span></div>
+        <p class="fdesc">Lifestyle film for a residential lofts project: kitchens, baths, coworking and dojo brought to life with AI, guided by a virtual host.</p>
+        <div class="strip rv">
+          <img src="assets/img/gal/aokii_1.jpg" alt="Aokii Lofts · Amenities — kitchen" loading="lazy">
+          <img src="assets/img/gal/aokii_2.jpg" alt="Aokii Lofts · Amenities — bathroom" loading="lazy">
+          <img src="assets/img/gal/aokii_3.jpg" alt="Aokii Lofts · Amenities — dojo" loading="lazy">
+        </div>
+      </div>
+      <div class="fcase rv">
+        <div class="player" data-player>
+          <video preload="none" poster="assets/vid/wakeup_airdrop_poster.jpg" playsinline><source src="assets/vid/wakeup_airdrop.mp4" type="video/mp4"></video>
+          <div class="playhint"><span><svg viewBox="0 0 24 24" width="24" height="24"><path d="M6 4l14 8-14 8z" fill="#fff"/></svg></span></div>
+        </div>
+        <div class="fmeta"><span class="cl">WakeUp · Airdrop</span><span class="cat">Colombia · Promo campaign · AI Film</span></div>
+        <p class="fdesc">A cargo plane, a red button and crates of peanut butter falling over the world&#x27;s cities: a sales campaign told as an action film.</p>
+        <div class="strip rv">
+          <img src="assets/img/gal/wakeup_airdrop_1.jpg" alt="WakeUp · Airdrop — Paris" loading="lazy">
+          <img src="assets/img/gal/wakeup_airdrop_2.jpg" alt="WakeUp · Airdrop — New York" loading="lazy">
+          <img src="assets/img/gal/wakeup_airdrop_3.jpg" alt="WakeUp · Airdrop — on the road" loading="lazy">
+        </div>
+      </div>
+      <div class="fcase rv">
+        <div class="player" data-player>
+          <video preload="none" poster="assets/vid/nena_angel_poster.jpg" playsinline><source src="assets/vid/nena_angel.mp4" type="video/mp4"></video>
+          <div class="playhint"><span><svg viewBox="0 0 24 24" width="24" height="24"><path d="M6 4l14 8-14 8z" fill="#fff"/></svg></span></div>
+        </div>
+        <div class="fmeta"><span class="cl">Nena Kids · Ángel de mi guarda</span><span class="cat">Kids · Baby care · CGI Character Film</span></div>
+        <p class="fdesc">A goodnight prayer turned into a lullaby film: a mother, a sleeping baby and angels watching over the clouds.</p>
+        <div class="strip rv">
+          <img src="assets/img/gal/nena_angel_1.jpg" alt="Nena Kids · Ángel de mi guarda — mother and baby" loading="lazy">
+          <img src="assets/img/gal/nena_angel_2.jpg" alt="Nena Kids · Ángel de mi guarda — sweet dreams" loading="lazy">
+          <img src="assets/img/gal/nena_angel_3.jpg" alt="Nena Kids · Ángel de mi guarda — angels" loading="lazy">
+        </div>
+      </div>
+      <div class="fcase rv">
+        <div class="player" data-player>
+          <video preload="none" poster="assets/vid/wakeup_360_poster.jpg" playsinline><source src="assets/vid/wakeup_360.mp4" type="video/mp4"></video>
+          <div class="playhint"><span><svg viewBox="0 0 24 24" width="24" height="24"><path d="M6 4l14 8-14 8z" fill="#fff"/></svg></span></div>
+        </div>
+        <div class="fmeta"><span class="cl">WakeUp · Peanut butter 360</span><span class="cat">Colombia · Hyperreal product · AI Film</span></div>
+        <p class="fdesc">From the plant to the jar to the first bite: hyperreal product film with the real packaging locked in every frame.</p>
+        <div class="strip rv">
+          <img src="assets/img/gal/wakeup_360_1.jpg" alt="WakeUp · Peanut butter 360 — the plant" loading="lazy">
+          <img src="assets/img/gal/wakeup_360_2.jpg" alt="WakeUp · Peanut butter 360 — toast" loading="lazy">
+          <img src="assets/img/gal/wakeup_360_3.jpg" alt="WakeUp · Peanut butter 360 — the bite" loading="lazy">
+        </div>
+      </div>
+      <div class="fcase rv">
+        <div class="player" data-player>
+          <video preload="none" poster="assets/vid/nena_navidad_poster.jpg" playsinline><source src="assets/vid/nena_navidad.mp4" type="video/mp4"></video>
+          <div class="playhint"><span><svg viewBox="0 0 24 24" width="24" height="24"><path d="M6 4l14 8-14 8z" fill="#fff"/></svg></span></div>
+        </div>
+        <div class="fmeta"><span class="cl">Nena Kids · Mi primera Navidad</span><span class="cat">Kids · Baby care · CGI Character Film</span></div>
+        <p class="fdesc">A baby&#x27;s first Christmas with the whole family: grandparents at the door, lights, snow and a town square celebrating.</p>
+        <div class="strip rv">
+          <img src="assets/img/gal/nena_navidad_1.jpg" alt="Nena Kids · Mi primera Navidad — the tree" loading="lazy">
+          <img src="assets/img/gal/nena_navidad_2.jpg" alt="Nena Kids · Mi primera Navidad — out in the snow" loading="lazy">
+          <img src="assets/img/gal/nena_navidad_3.jpg" alt="Nena Kids · Mi primera Navidad — by the window" loading="lazy">
+        </div>
+      </div>
+      <div class="fcase rv">
+        <div class="player" data-player>
+          <video preload="none" poster="assets/vid/wakeup_halloween_poster.jpg" playsinline><source src="assets/vid/wakeup_halloween.mp4" type="video/mp4"></video>
+          <div class="playhint"><span><svg viewBox="0 0 24 24" width="24" height="24"><path d="M6 4l14 8-14 8z" fill="#fff"/></svg></span></div>
+        </div>
+        <div class="fmeta"><span class="cl">WakeUp · Halloween</span><span class="cat">Colombia · Seasonal campaign · AI Film</span></div>
+        <p class="fdesc">“This Halloween, our biggest fear is that you stay asleep.” A seasonal horror short that ends with a wake-up call.</p>
+        <div class="strip rv">
+          <img src="assets/img/gal/wakeup_halloween_1.jpg" alt="WakeUp · Halloween — empty swings" loading="lazy">
+          <img src="assets/img/gal/wakeup_halloween_2.jpg" alt="WakeUp · Halloween — the commute" loading="lazy">
+          <img src="assets/img/gal/wakeup_halloween_3.jpg" alt="WakeUp · Halloween — the walk home" loading="lazy">
+        </div>
+      </div>
+      <div class="fcase rv">
+        <div class="player" data-player>
+          <video preload="none" poster="assets/vid/nena_agua_poster.jpg" playsinline><source src="assets/vid/nena_agua.mp4" type="video/mp4"></video>
+          <div class="playhint"><span><svg viewBox="0 0 24 24" width="24" height="24"><path d="M6 4l14 8-14 8z" fill="#fff"/></svg></span></div>
+        </div>
+        <div class="fmeta"><span class="cl">Nena Kids · El agua nos espera</span><span class="cat">Kids · Baby care · CGI Character Film</span></div>
+        <p class="fdesc">Bath time as an adventure: a rubber duck, bubbles and the first splash, told from the baby&#x27;s point of view.</p>
+        <div class="strip rv">
+          <img src="assets/img/gal/nena_agua_1.jpg" alt="Nena Kids · El agua nos espera — the duck" loading="lazy">
+          <img src="assets/img/gal/nena_agua_2.jpg" alt="Nena Kids · El agua nos espera — splash" loading="lazy">
+          <img src="assets/img/gal/nena_agua_3.jpg" alt="Nena Kids · El agua nos espera — the towel" loading="lazy">
+        </div>
+      </div>
+      <div class="fcase rv">
+        <div class="player" data-player>
+          <video preload="none" poster="assets/vid/nena_dia_poster.jpg" playsinline><source src="assets/vid/nena_dia.mp4" type="video/mp4"></video>
+          <div class="playhint"><span><svg viewBox="0 0 24 24" width="24" height="24"><path d="M6 4l14 8-14 8z" fill="#fff"/></svg></span></div>
+        </div>
+        <div class="fmeta"><span class="cl">Nena Kids · El día terminó</span><span class="cat">Kids · Baby care · CGI Character Film</span></div>
+        <p class="fdesc">The bedtime ritual — lotion, pajamas, a soft toy and the crib — as a calm, tender closing to the day.</p>
+        <div class="strip rv">
+          <img src="assets/img/gal/nena_dia_1.jpg" alt="Nena Kids · El día terminó — playtime" loading="lazy">
+          <img src="assets/img/gal/nena_dia_2.jpg" alt="Nena Kids · El día terminó — goodnight" loading="lazy">
+          <img src="assets/img/gal/nena_dia_3.jpg" alt="Nena Kids · El día terminó — together" loading="lazy">
+        </div>
+      </div>
+      <div class="fcase rv">
+        <div class="player" data-player>
+          <video preload="none" poster="assets/vid/nena_sombra_poster.jpg" playsinline><source src="assets/vid/nena_sombra.mp4" type="video/mp4"></video>
+          <div class="playhint"><span><svg viewBox="0 0 24 24" width="24" height="24"><path d="M6 4l14 8-14 8z" fill="#fff"/></svg></span></div>
+        </div>
+        <div class="fmeta"><span class="cl">Nena Kids · Mira la sombra</span><span class="cat">Kids · Baby care · CGI Character Film</span></div>
+        <p class="fdesc">Shadow play on the nursery wall: a mother, a baby and the first game of light and shapes.</p>
+        <div class="strip rv">
+          <img src="assets/img/gal/nena_sombra_1.jpg" alt="Nena Kids · Mira la sombra — shadow play" loading="lazy">
+          <img src="assets/img/gal/nena_sombra_2.jpg" alt="Nena Kids · Mira la sombra — the wall" loading="lazy">
+          <img src="assets/img/gal/nena_sombra_3.jpg" alt="Nena Kids · Mira la sombra — first steps" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+    <!-- WAKEUP VERTICAL REELS -->
+    <div class="rv" style="margin-top:clamp(56px,9vh,90px)">
+      <div class="eyebrow">Social content ecosystems</div>
+      <h2 class="title" style="font-size:clamp(26px,3.6vw,46px)">WakeUp · <span class="red">Always-on reels.</span></h2>
+      <p class="lede">Recipes, launches and seasonal pieces for a nutrition brand — one visual system, a new story every week.</p>
+    </div>
+    <div class="reels rv">
+      <div class="lp"><video autoplay muted loop playsinline preload="metadata" poster="assets/vid/wakeup_reel_aguas_poster.jpg" data-loop><source src="assets/vid/wakeup_reel_aguas.mp4" type="video/mp4"></video></div>
+      <div class="lp"><video autoplay muted loop playsinline preload="metadata" poster="assets/vid/wakeup_reel_packs_poster.jpg" data-loop><source src="assets/vid/wakeup_reel_packs.mp4" type="video/mp4"></video></div>
+      <div class="lp"><video autoplay muted loop playsinline preload="metadata" poster="assets/vid/wakeup_reel_waffles_poster.jpg" data-loop><source src="assets/vid/wakeup_reel_waffles.mp4" type="video/mp4"></video></div>
+      <div class="lp"><video autoplay muted loop playsinline preload="metadata" poster="assets/vid/wakeup_reel_nieve_poster.jpg" data-loop><source src="assets/vid/wakeup_reel_nieve.mp4" type="video/mp4"></video></div>
+      <div class="lp"><video autoplay muted loop playsinline preload="metadata" poster="assets/vid/wakeup_reel_mama_poster.jpg" data-loop><source src="assets/vid/wakeup_reel_mama.mp4" type="video/mp4"></video></div>
+    </div>
+
+    <!-- BE.BALANCE VERTICAL STORIES -->
+    <div class="rv" style="margin-top:clamp(56px,9vh,90px)">
+      <div class="eyebrow">Recurring cast · Locked product</div>
+      <h2 class="title" style="font-size:clamp(26px,3.6vw,46px)">Be.Balance · <span class="red">Vertical stories.</span></h2>
+      <p class="lede">Nutrición Consciente: a recurring cast, real packaging locked in every shot and six stories that move from the gym to the kitchen to the road.</p>
+    </div>
+    <div class="reels r6 rv">
+      <div class="lp"><video autoplay muted loop playsinline preload="metadata" poster="assets/vid/bebalance_1_poster.jpg" data-loop><source src="assets/vid/bebalance_1.mp4" type="video/mp4"></video></div>
+      <div class="lp"><video autoplay muted loop playsinline preload="metadata" poster="assets/vid/bebalance_2_poster.jpg" data-loop><source src="assets/vid/bebalance_2.mp4" type="video/mp4"></video></div>
+      <div class="lp"><video autoplay muted loop playsinline preload="metadata" poster="assets/vid/bebalance_3_poster.jpg" data-loop><source src="assets/vid/bebalance_3.mp4" type="video/mp4"></video></div>
+      <div class="lp"><video autoplay muted loop playsinline preload="metadata" poster="assets/vid/bebalance_4_poster.jpg" data-loop><source src="assets/vid/bebalance_4.mp4" type="video/mp4"></video></div>
+      <div class="lp"><video autoplay muted loop playsinline preload="metadata" poster="assets/vid/bebalance_5_poster.jpg" data-loop><source src="assets/vid/bebalance_5.mp4" type="video/mp4"></video></div>
+      <div class="lp"><video autoplay muted loop playsinline preload="metadata" poster="assets/vid/bebalance_6_poster.jpg" data-loop><source src="assets/vid/bebalance_6.mp4" type="video/mp4"></video></div>
     </div>
   </div>
 </section>
@@ -712,6 +905,20 @@ players.forEach(function(p){
     }else{v.pause();p.classList.remove('playing');}
   });
   v.addEventListener('ended',function(){p.classList.remove('playing');v.removeAttribute('controls');});
+});
+
+// YouTube facade (ARDE original): load the embed only on click, pause the others
+document.querySelectorAll('[data-yt]').forEach(function(p){
+  function go(){
+    if(p.querySelector('iframe'))return;
+    players.forEach(function(q){var w=q.querySelector('video');if(w){w.pause();}q.classList.remove('playing');});
+    var f=document.createElement('iframe');
+    f.src='https://www.youtube.com/embed/'+p.getAttribute('data-yt')+'?autoplay=1&rel=0&playsinline=1';
+    f.title='Diary of a Bastard';f.setAttribute('allow','autoplay; encrypted-media; picture-in-picture; fullscreen');f.setAttribute('allowfullscreen','');
+    p.innerHTML='';p.appendChild(f);p.classList.add('playing');p.removeAttribute('role');p.removeAttribute('tabindex');
+  }
+  p.addEventListener('click',go);
+  p.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}});
 });
 
 // ambient loops: only play while visible
